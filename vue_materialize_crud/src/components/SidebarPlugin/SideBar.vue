@@ -1,137 +1,97 @@
 <template>
-    <div class="sidebar" :data-color="activeColor" :data-image="backgroundImage" :data-background-color="backgroundColor" :style="sidebarStyle">
-        <div class="logo">
-            <a :href="link" class="simple-text logo-mini" target="_blank">
-                <div class="logo-img">
-                    <img :src="logo" />
-                </div>
-            </a>
-            <a :href="link" class="simple-text logo-normal" target="_blank">
-            <template v-if="$route.meta.rtlActive">{{ rtlTitle }}
-</template>
-
-<template v-else>
-    {{ title }}
-</template>
+  <div
+    class="sidebar"
+    :data-color="activeColor"
+    :data-image="backgroundImage"
+    :style="sidebarStyle"
+  >
+    <div class="logo">
+      <a href="#" class="simple-text logo-mini">
+        <div class="logo-img">
+          <img :src="imgLogo" alt="" />
+        </div>
       </a>
-      <div class="navbar-minimize">
-        <md-button
-          id="minimizeSidebar"
-          class="md-round md-just-icon md-transparent"
-          @click="minimizeSidebar"
-        >
-          <i class="material-icons text_align-center visible-on-sidebar-regular"
-            >more_vert</i
-          >
-          <i
-            class="material-icons design_bullet-list-67 visible-on-sidebar-mini"
-            >view_list</i
-          >
-        </md-button>
-      </div>
+
+      <a
+        href="https://www.creative-tim.com/product/vue-material-dashboard"
+        target="_blank"
+        class="simple-text logo-normal"
+      >
+        {{ title }}
+      </a>
     </div>
-    <div class="sidebar-wrapper" ref="sidebarScrollArea">
-      <slot></slot>
+    <div class="sidebar-wrapper">
+      <slot name="content"></slot>
       <md-list class="nav">
-        <slot name="links">
-          <sidebar-item
+        <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
+        <slot>
+          <sidebar-link
             v-for="(link, index) in sidebarLinks"
             :key="link.name + index"
+            :to="link.path"
             :link="link"
           >
-            <sidebar-item
-              v-for="(subLink, index) in link.children"
-              :key="subLink.name + index"
-              :link="subLink"
-            >
-            </sidebar-item>
-          </sidebar-item>
+          </sidebar-link>
         </slot>
       </md-list>
     </div>
   </div>
 </template>
-
 <script>
+import SidebarLink from "./SidebarLink.vue";
+
 export default {
-    name: "sidebar",
-    props: {
-        title: {
-            type: String,
-            default: "Gôndola"
-        },
-        rtlTitle: {
-            type: String,
-            default: "Gôndola"
-        },
-         link: {
-            type: String,
-            default: "https://app.gondolasegura.com.br"
-        },
-        activeColor: {
-            type: String,
-            default: "",
-            validator: value => {
-                let acceptedValues = [
-                    "",
-                    "purple",
-                    "azure",
-                    "green",
-                    "orange",
-                    "danger",
-                    "rose"
-                ];
-                return acceptedValues.indexOf(value) !== -1;
-            }
-        },
-        backgroundImage: {
-            type: String,
-            default: "./img/sidebar.jpg"
-        },
-        backgroundColor: {
-            type: String,
-            default: "",
-            validator: value => {
-                let acceptedValues = ["", "black", "white", "red"];
-                return acceptedValues.indexOf(value) !== -1;
-            }
-        },
-        logo: {
-            type: String,
-            default: "./img/logo2.png"
-        },
-        sidebarLinks: {
-            type: Array,
-            default: () => []
-        },
-        autoClose: {
-            type: Boolean,
-            default: false
-        }
+  components: {
+    SidebarLink
+  },
+  props: {
+    title: {
+      type: String,
+      default: "REND"
     },
-    provide() {
-        return {
-            autoClose: this.autoClose
-        };
+    backgroundImage: {
+      type: String,
+      default: require("@/assets/img/sidebar-2.jpg")
     },
-    methods: {
-        minimizeSidebar() {
-            if (this.$sidebar) {
-                this.$sidebar.toggleMinimize();
-            }
-        }
+    imgLogo: {
+      type: String,
+      default: require("@/assets/images/logo2.png")
     },
-    computed: {
-        sidebarStyle() {
-            return {
-                backgroundImage: `url(${this.backgroundImage})`
-            };
-        }
+    activeColor: {
+      type: String,
+      default: "blue",
+      validator: value => {
+        let acceptedValues = ["", "purple", "blue", "green", "orange", "red"];
+        return acceptedValues.indexOf(value) !== -1;
+      }
     },
-    beforeDestroy() {
-        if (this.$sidebar.showSidebar) {
-            this.$sidebar.showSidebar = false;
-        }
+    sidebarLinks: {
+      type: Array,
+      default: () => []
+    },
+    autoClose: {
+      type: Boolean,
+      default: true
     }
+  },
+  provide() {
+    return {
+      autoClose: this.autoClose
+    };
+  },
+  computed: {
+    sidebarStyle() {
+      return {
+        backgroundImage: `url(${this.backgroundImage})`
+      };
+    }
+  }
 };
 </script>
+<style>
+@media screen and (min-width: 991px) {
+  .nav-mobile-menu {
+    display: none;
+  }
+}
+</style>
