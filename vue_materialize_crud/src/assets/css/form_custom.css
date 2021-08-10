@@ -1,0 +1,38 @@
+.md-card .md-card-actions {
+    border: none;
+  }
+  
+  .md-inline-checkboxes {
+    display: inline-flex;
+  
+    .md-checkbox {
+      margin-top: 15px !important;
+    }
+  }
+  
+  .md-checkbox,
+  .md-radio {
+    margin-top: 15px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .md-checkbox,
+  .md-radio {
+    display: flex;
+  }
+  
+  .md-radio /deep/ .md-radio-container {
+    margin-left: 5px;
+    position: relative;
+    left: -3px;
+  }
+  
+  .md-form-label + .md-layout-item .md-checkbox:not(:first-child),
+  .md-form-label + .md-layout-item + .md-layout-item .md-radio:not(:first-child),
+  .md-form-label + .md-layout-item .md-radio {
+    margin-top: 0;
+  }
+  
+  .form-control-static {
+    margin-top: 6px;
+  }
