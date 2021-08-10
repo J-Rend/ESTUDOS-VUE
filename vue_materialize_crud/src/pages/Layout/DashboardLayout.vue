@@ -71,12 +71,15 @@ import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
 
+import SidebarLink from "../../components/SidebarPlugin/SidebarLink.vue";
+
 export default {
   components: {
     TopNavbar,
     DashboardContent,
     ContentFooter,
-    MobileMenu
+    MobileMenu,
+    SidebarLink
   }
 };
 </script>

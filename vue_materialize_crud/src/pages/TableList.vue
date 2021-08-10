@@ -1,4 +1,5 @@
 <template>
+<!-- 
   <div class="content">
     <div class="md-layout">
       <div
@@ -30,15 +31,17 @@
       </div>
     </div>
   </div>
+  -->
+  <div></div>
 </template>
 
 <script>
-import { SimpleTable, OrderedTable } from "@/components";
+//import { SimpleTable, OrderedTable } from "@/components";
 
 export default {
   components: {
-    OrderedTable,
-    SimpleTable
+  //  OrderedTable,
+  //  SimpleTable
   }
 };
 </script>

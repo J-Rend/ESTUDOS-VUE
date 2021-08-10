@@ -204,6 +204,7 @@
 </template>
 
 <script>
+/* 
 import {
   StatsCard,
   ChartCard,
@@ -211,14 +212,15 @@ import {
   NavTabsTable,
   OrderedTable
 } from "@/components";
+*/
 
 export default {
   components: {
-    StatsCard,
+   /*  StatsCard,
     ChartCard,
     NavTabsCard,
     NavTabsTable,
-    OrderedTable
+    OrderedTable  */
   },
   data() {
     return {
